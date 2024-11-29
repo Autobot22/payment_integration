@@ -21,7 +21,7 @@ app.post('/create-payment-link', async (req, res) => {
 
     // Prepare the payload with dynamic fields
     const payload = {
-      amount: amountAsInteger * 2200, // Razorpay expects amount in paise
+      amount: amountAsInteger * 22000, // Razorpay expects amount in paise
       currency: 'INR',
       accept_partial: false,
       first_min_partial_amount: 0,

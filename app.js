@@ -27,7 +27,7 @@ app.post('/create-payment-link', async (req, res) => {
       first_min_partial_amount: 0,
       expire_by: Math.floor(Date.now() / 1000) + 3600, // 1 hour expiry
       reference_id: reference_id || `ref_${Date.now()}`, // Default reference ID
-      description: 'Payment for policy no #23456(CLICK ON UPI ID and type success@razorpay)',
+      description: 'Note For testing users : Click on the UPI ID and type success@razorpay to complete the transaction in test mode.',
       customer: {
         name: name || 'N/A', // Default name
         contact: contact || null, // Contact can be null

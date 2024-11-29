@@ -9,10 +9,7 @@ const authHeader = `Basic cnpwX3Rlc3RfS3N1ZnYxOHZQUWJMVjI6Q1ROdzlnY1VlZnRPSEd3VT
 // Dynamic endpoint for creating a payment link
 app.post('/create-payment-link', async (req, res) => {
     const { ticket, reference_id, name, email, contact } = req.body;
-    let amountAsInteger = parseInt(ticket, 10);
-    if (!amountAsInteger) {
-      return res.status(400).json({ error: 'Amount is required' });
-    }
+    let amountAsInteger = parseInt(ticket);
 
     // Prepare the payload with dynamic fields
     const payload = {

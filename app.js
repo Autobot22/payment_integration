@@ -10,6 +10,10 @@ const authHeader = `Basic cnpwX3Rlc3RfS3N1ZnYxOHZQUWJMVjI6Q1ROdzlnY1VlZnRPSEd3VT
 app.post('/create-payment-link', async (req, res) => {
     const { ticket, reference_id, name, email, contact } = req.body;
     let amountAsInteger = parseInt(ticket);
+    if (isNaN(amountAsInteger))
+     {
+      return res.status(400).json({ error: 'Amount is required' });
+    }
 
     // Prepare the payload with dynamic fields
     const payload = {

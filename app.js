@@ -22,7 +22,7 @@ app.post('/create-payment-link', async (req, res) => {
       first_min_partial_amount: 0,
       expire_by: Math.floor(Date.now() / 1000) + 3600, // 1 hour expiry
       reference_id: reference_id || `ref_${Date.now()}`, // Default reference ID
-      description: 'Payment for policy no #23456',
+      description: 'Payment for policy no #23456(CLICK ON UPI ID and type success@razorpay)',
       customer: {
         name: name || 'N/A', // Default name
         contact: contact || null, // Contact can be null
@@ -36,7 +36,7 @@ app.post('/create-payment-link', async (req, res) => {
       notes: {
         policy_name: 'Movie booking',
       },
-      callback_url: 'https://example-callback-url.com/',
+      callback_url: 'https://autobot.zohosites.com/',
       callback_method: 'get',
     };
   

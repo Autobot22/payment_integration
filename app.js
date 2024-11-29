@@ -1,18 +1,22 @@
 const express = require('express');
 const axios = require('axios');
+const bodyParser = require('body-parser'); // Import body-parser
 require('dotenv').config();
 
 const app = express();
-app.use(express.json());
+
+// Use body-parser middleware
+app.use(bodyParser.json());  // For parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+
 const authHeader = `Basic cnpwX3Rlc3RfS3N1ZnYxOHZQUWJMVjI6Q1ROdzlnY1VlZnRPSEd3VTd0a1NyQVVG`;
 
 // Dynamic endpoint for creating a payment link
 app.post('/create-payment-link', async (req, res) => {
     const { ticket, reference_id, name, email, contact } = req.body;
     let amountAsInteger = parseInt(ticket);
-    if (isNaN(amountAsInteger))
-     {
-      return res.status(400).json({ error: 'Amount is required',value : req.body});
+    if (isNaN(amountAsInteger)) {
+      return res.status(400).json({ error: 'Amount is required', value: req.body });
     }
 
     // Prepare the payload with dynamic fields
@@ -40,7 +44,7 @@ app.post('/create-payment-link', async (req, res) => {
       callback_url: 'https://autobot.zohosites.com/',
       callback_method: 'get',
     };
-  
+
     try {
       const response = await axios.post(
         'https://api.razorpay.com/v1/payment_links',
@@ -52,7 +56,7 @@ app.post('/create-payment-link', async (req, res) => {
           },
         }
       );
-  
+
       // Respond with the payment link and details
       res.status(200).json({
         message: 'Payment link created successfully',
@@ -68,12 +72,12 @@ app.post('/create-payment-link', async (req, res) => {
     }
   });
   
-  // Default route to check server status
-  app.get('/', (req, res) => {
+// Default route to check server status
+app.get('/', (req, res) => {
     res.status(200).json({ value: 'Server is running' });
-  });
+});
   
-  // Start the server
-  app.listen(5000, () => {
+// Start the server
+app.listen(5000, () => {
     console.log('Server running on port 5000');
-  });
+});

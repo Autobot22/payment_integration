@@ -9,14 +9,14 @@ const authHeader = `Basic cnpwX3Rlc3RfS3N1ZnYxOHZQUWJMVjI6Q1ROdzlnY1VlZnRPSEd3VT
 // Dynamic endpoint for creating a payment link
 app.post('/create-payment-link', async (req, res) => {
     const { ticket, reference_id, name, email, contact } = req.body;
-  
-    if (!ticket) {
+    let amountAsInteger = parseInt(ticket, 10);
+    if (!amountAsInteger) {
       return res.status(400).json({ error: 'Amount is required' });
     }
 
     // Prepare the payload with dynamic fields
     const payload = {
-      amount: ticket * 2200, // Razorpay expects amount in paise
+      amount: amountAsInteger * 2200, // Razorpay expects amount in paise
       currency: 'INR',
       accept_partial: false,
       first_min_partial_amount: 0,

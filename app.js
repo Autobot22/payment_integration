@@ -12,7 +12,7 @@ app.post('/create-payment-link', async (req, res) => {
     let amountAsInteger = parseInt(ticket);
     if (isNaN(amountAsInteger))
      {
-      return res.status(400).json({ error: 'Amount is required' });
+      return res.status(400).json({ error: 'Amount is required',value : amountAsInteger });
     }
 
     // Prepare the payload with dynamic fields
